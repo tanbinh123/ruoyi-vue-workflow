@@ -1,0 +1,41 @@
+package ${packageName}.service.mapstruct;
+
+import ${packageName}.domain.${ClassName};
+import ${packageName}.domain.dto.${ClassName}Dto;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
+
+/**
+* @author ${author}
+* @date ${datetime}
+**/
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface ${ClassName}MapperStruct {
+    /**
+    * DTO转Entity
+    * @param dto /
+    * @return /
+    */
+    ${ClassName} toEntity(${ClassName}Dto dto);
+
+    /**
+    * Entity转DTO
+    * @param entity /
+    * @return /
+    */
+    ${ClassName}Dto toDto(${ClassName} entity);
+
+    /**
+    * DTO集合转Entity集合
+    * @param dtoList /
+    * @return /
+    */
+    List<${ClassName}> toEntity(List<${ClassName}Dto> dtoList);
+
+    /**
+    * Entity集合转DTO集合
+    * @param entityList /
+    * @return /
+    */
+    List <${ClassName}Dto> toDto(List<${ClassName}> entityList);
+}

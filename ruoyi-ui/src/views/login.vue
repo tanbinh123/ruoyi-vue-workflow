@@ -101,8 +101,11 @@ export default {
   methods: {
 
     giteeLogin() {
-      window.open("https://gitee.com/oauth/authorize?client_id=e09b8f7795aeb9911bf363992c428f00ec14f0268a49351f95213c84ed4b7a34&redirect_uri=http://localhost:8080/callback&response_type=code&scope=user_info", 'newwindow',
-          'top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+      // /giteeLogin
+      // window.open("https://gitee.com/oauth/authorize?client_id=e09b8f7795aeb9911bf363992c428f00ec14f0268a49351f95213c84ed4b7a34&redirect_uri=http://localhost:8080/callback&response_type=code&scope=user_info", 'newwindow',
+      //     'top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+      window.open("http://localhost:8080/giteeLogin", 'newwindow',
+        'top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
 
     },
 

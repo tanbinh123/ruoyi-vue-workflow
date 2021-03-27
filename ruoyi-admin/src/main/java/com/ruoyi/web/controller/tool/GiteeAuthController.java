@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +24,11 @@ public class GiteeAuthController {
 
     @Autowired
     private Configuration configuration;
+
+    @GetMapping("/giteeLogin")
+    public void giteeLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect("https://gitee.com/oauth/authorize?client_id=e09b8f7795aeb9911bf363992c428f00ec14f0268a49351f95213c84ed4b7a34&redirect_uri=http://localhost:8080/callback&response_type=code&scope=user_info");
+    }
 
 
     @org.springframework.web.bind.annotation.ResponseBody

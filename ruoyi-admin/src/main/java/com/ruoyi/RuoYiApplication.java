@@ -1,8 +1,10 @@
 package com.ruoyi;
 
+import freemarker.template.TemplateExceptionHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 
 /**
  * 启动程序
@@ -26,5 +28,17 @@ public class RuoYiApplication
                 " |  | \\ `'   /|   `-'  /           \n" +
                 " |  |  \\    /  \\      /           \n" +
                 " ''-'   `'-'    `-..-'              ");
+    }
+
+    @Bean
+    public freemarker.template.Configuration configuration() {
+
+        freemarker.template.Configuration configuration =
+                new freemarker.template.Configuration(freemarker.template.Configuration.getVersion());
+        configuration.setDefaultEncoding("UTF-8");
+        configuration.setClassForTemplateLoading(this.getClass(), "/static/ftl");
+
+        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        return configuration;
     }
 }

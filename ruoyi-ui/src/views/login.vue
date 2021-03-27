@@ -43,11 +43,13 @@
         >
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
+
         </el-button>
       </el-form-item>
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
+      <span @click="giteeLogin" style="cursor: pointer">gitee登录</span>
       <span>Copyright © 2018-2021 ruoyi.vip All Rights Reserved.</span>
     </div>
   </div>
@@ -97,6 +99,13 @@ export default {
     this.getCookie();
   },
   methods: {
+
+    giteeLogin() {
+      window.open("https://gitee.com/oauth/authorize?client_id=e09b8f7795aeb9911bf363992c428f00ec14f0268a49351f95213c84ed4b7a34&redirect_uri=http://localhost:8080/callback&response_type=code&scope=user_info", 'newwindow',
+          'top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+
+    },
+
     getCode() {
       getCodeImg().then(res => {
         this.codeUrl = "data:image/gif;base64," + res.img;
@@ -137,6 +146,13 @@ export default {
     }
   }
 };
+
+// 通过监听，父页面可以拿到子页面传递的token，父(前端页面)，子(小窗)
+window.addEventListener('message', function (e) {
+  console.log(e.data);
+  // document.getElementById("username").innerText = e.data;
+}, false)
+
 </script>
 
 <style rel="stylesheet/scss" lang="scss">

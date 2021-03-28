@@ -2,6 +2,7 @@ package com.ruoyi.web.controller.tool;
 
 import com.alibaba.fastjson.JSON;
 
+import com.ruoyi.framework.web.service.SysLoginService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -25,6 +26,9 @@ public class GiteeAuthController {
     @Autowired
     private Configuration configuration;
 
+    @Autowired
+    private SysLoginService sysLoginService;
+
     @GetMapping("/giteeLogin")
     public void giteeLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect("https://gitee.com/oauth/authorize?client_id=e09b8f7795aeb9911bf363992c428f00ec14f0268a49351f95213c84ed4b7a34&redirect_uri=http://localhost:8080/callback&response_type=code&scope=user_info");
@@ -35,7 +39,11 @@ public class GiteeAuthController {
     @GetMapping("/callback")
     public void callback(@RequestParam String code, @RequestParam(required = false) String state, HttpServletResponse response) throws IOException, TemplateException {
 
-        String token = getToken(code);
+        String accessToken = getToken(code);
+
+        System.err.println("accessToken: " + accessToken);
+
+        String token = sysLoginService.handleLogin("admin", "admin123");
 
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
@@ -87,7 +95,7 @@ public class GiteeAuthController {
                 for (int i = 0; i < headers.size(); i++) {
                     System.err.println(headers.name(i) + ":" + headers.value(i));
                 }
-                String body = response.body().toString();
+                String body = response.body().string();
                 System.err.println("onResponse: " + body);
                 completableFuture.complete(body);
             }

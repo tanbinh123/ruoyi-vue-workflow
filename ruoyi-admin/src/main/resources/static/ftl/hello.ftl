@@ -7,11 +7,10 @@
 <h2>登录中...</h2>
 <script>
     window.onload = function () {
-        alert("124")
-        window.opener.postMessage("test123456", "*");
+        alert("${token}")
+        window.opener.postMessage("${token}", "*");
         window.close();
     }
 </script>
-
 </body>
 </html>

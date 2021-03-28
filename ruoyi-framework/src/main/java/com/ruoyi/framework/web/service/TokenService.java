@@ -3,6 +3,7 @@ package com.ruoyi.framework.web.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -205,6 +206,9 @@ public class TokenService
     private String getToken(HttpServletRequest request)
     {
         String token = request.getHeader(header);
+
+        Pattern pattern = Pattern.compile("[0-9a-zA-Z!@#$%&*]+");
+
         if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
         {
             token = token.replace(Constants.TOKEN_PREFIX, "");

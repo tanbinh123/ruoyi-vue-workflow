@@ -46,6 +46,15 @@ const user = {
       })
     },
 
+    // 设置token
+    StoreToken({ commit }, token) {
+      return new Promise((resolve, reject) => {
+        setToken(token);
+        commit('SET_TOKEN', token);
+        resolve();
+      })
+    },
+
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
@@ -66,7 +75,7 @@ const user = {
         })
       })
     },
-    
+
     // 退出系统
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
